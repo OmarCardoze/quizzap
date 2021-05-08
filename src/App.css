@@ -14,6 +14,36 @@
   color: white;
 }
 
+/*buttonColors*/
+
+.greenSoft {
+  background-color: #98ddca;
+  color: #fff;
+}
+
+.lemonGrenn {
+  background-color: #d5ecc2;
+  color: #fff;
+}
+
+.salmon {
+  background-color: #ffd3b4;
+  color: #fff;
+}
+
+.rosa {
+  background-color: #ffaaa7;
+  color: #fff;
+}
+
+.correct {
+  background-color: rgb(0, 180, 0);
+}
+
+.Incorrect {
+  background-color: rgb(0, 180, 0);
+}
+
 /*menu*/
 
 .menuContainer {
@@ -26,7 +56,7 @@
 .titleContainer {
   background-color: white;
   width: 40vw;
-  background-image: linear-gradient(90deg,rgba(52, 16, 212, 0.6), rgba(0,0,0,0.6)), url(https://images.unsplash.com/photo-1566956031644-74266ac466f6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80);
+  background-image: linear-gradient(90deg,rgba(52, 16, 212, 0.6), rgba(0,0,0,0.6)), url(https://source.unsplash.com/1600x900/?panamá);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -46,6 +76,10 @@
   margin-bottom: 20px;
 }
 
+.startContainer p {
+  font-size: clamp(1rem, 2.5vw, 1.5rem); 
+}
+
 .menu-button {
   margin-top: 20px;
   padding: 20px;
@@ -59,6 +93,31 @@
   border-image: none;
 }
 
+/*Quiz screen*/
+
+.quizContainer {
+  background-color: #000;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  display: flex;
+
+}
+
+
+
+.questionPrompt {
+  color: aqua;
+  font-size: clamp(2.5rem, 6vw, 4rem); 
+}
+
+.buttonOption {
+  width: 80vw;
+  height: 10vh;
+}
+
+/*menu breapoint*/
+
  @media (max-width: 768px) { 
   .titleContainer {
     display: none;
@@ -70,8 +129,6 @@
     width: 100%;
   }
 
-  .startContainer p {
-    font-size: clamp(1rem, 2.5vw, 2rem); 
-  }
+  
 
 }

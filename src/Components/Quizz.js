@@ -2,18 +2,35 @@ import React, { useState, useContext } from 'react'
 import { Questions } from '../Components/Helpers/Questions'
 import { QuizContext } from './Helpers/Context'
 
+import '../App.css'
+
 function Quizz() {
 
     const { gameScore, setGameScore, setGameState } = useContext(QuizContext)
 
     const [currQuestion, setcurrQuestion] = useState(0);
     const [optionChosen, setOptionChosen] = useState("");
+    const [isCorrect, setIsCorrect] = useState(true)
+
+
+    function getRandomInt() {
+
+        const buttonColor = ["greenSoft", "lemonGrenn", "salmon", "rosa"]
+
+        const randomNumber = Math.floor(Math.random() * buttonColor.length);
+        const colorButton = buttonColor[randomNumber]
+        return colorButton
+    }
+
+
+    console.log(getRandomInt());
 
     const nextQuestion = () => {
         if (Questions[currQuestion].asnwer === optionChosen) {
             setGameScore(gameScore + 1)
+            setIsCorrect(true)
         } else {
-            console.log("is not equal!")
+            setIsCorrect(false)
         }
         console.log(gameScore);
         setcurrQuestion(currQuestion + 1)
@@ -27,26 +44,38 @@ function Quizz() {
     }
 
     return (
-        <>
-            <div>
-                <h1>{Questions[currQuestion].prompt}</h1>
-                <button onClick={() => setOptionChosen("optionA")}>{Questions[currQuestion].optionA}</button>
-                <button onClick={() => setOptionChosen("optionB")}>{Questions[currQuestion].optionB}</button>
-                <button onClick={() => setOptionChosen("optionC")}>{Questions[currQuestion].optionC}</button>
-                <button onClick={() => setOptionChosen("optionD")}>{Questions[currQuestion].optionD}</button>
+        <div className="quizContainer t-White">
+            <div className="optionContainer">
+                <h1 className="questionPrompt">{Questions[currQuestion].prompt}</h1>
+                <button
+                    className={`buttonOption ${getRandomInt()}`}
+                    onClick={() => setOptionChosen("optionA")}>{Questions[currQuestion].optionA}
+                </button>
+                <button
+                    className={`buttonOption ${getRandomInt()}`}
+                    onClick={() => setOptionChosen("optionB")}>{Questions[currQuestion].optionB}
+                </button>
+                <button
+                    className={`buttonOption ${getRandomInt()}`}
+                    onClick={() => setOptionChosen("optionC")}>{Questions[currQuestion].optionC}
+                </button>
+                <button
+                    className={`buttonOption ${getRandomInt()}`}
+                    onClick={() => setOptionChosen("optionD")}>{Questions[currQuestion].optionD}
+                </button>
+                <div>
+                    {currQuestion === Questions.length - 1 ? (
+                        <button onClick={finishQuiz}>
+                            Finish Quiz
+                        </button>
+                    ) : (
+                        <button onClick={nextQuestion}>
+                            Next Question
+                        </button>
+                    )}
+                </div>
             </div>
-            <div>
-                {currQuestion === Questions.length - 1 ? (
-                    <button onClick={finishQuiz}>
-                        Finish Quiz
-                    </button>
-                ) : (
-                    <button onClick={nextQuestion}>
-                        Next Question
-                    </button>
-                )}
-            </div>
-        </>
+        </div>
     )
 }
 
