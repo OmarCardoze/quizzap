@@ -101,10 +101,23 @@
   height: 100vh;
   text-align: center;
   display: flex;
-
+  flex-direction: column;
 }
 
+.infoBar {
+  background-color: rgb(185, 23, 226);
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+}
 
+.infoBar .positionQuestion {
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+  padding: 10px;
+}
 
 .questionPrompt {
   color: aqua;

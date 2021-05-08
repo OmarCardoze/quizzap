@@ -1,6 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { Questions } from '../Components/Helpers/Questions'
 import { QuizContext } from './Helpers/Context'
+import useSound from 'use-sound';
+import answerSoundCorrect from '../sounds/correctAnswer.mp3'
+import answerSoundIncorrect from '../sounds/incorrectAnswer.mp3'
 
 import '../App.css'
 
@@ -10,7 +13,10 @@ function Quizz() {
 
     const [currQuestion, setcurrQuestion] = useState(0);
     const [optionChosen, setOptionChosen] = useState("");
-    const [isCorrect, setIsCorrect] = useState(true)
+
+    //sound hooks
+    const [playCorrectAswer] = useSound(answerSoundCorrect);
+    const [playInCorrectAswer] = useSound(answerSoundIncorrect);
 
 
     function getRandomInt() {
@@ -22,15 +28,12 @@ function Quizz() {
         return colorButton
     }
 
-
-    console.log(getRandomInt());
-
     const nextQuestion = () => {
         if (Questions[currQuestion].asnwer === optionChosen) {
             setGameScore(gameScore + 1)
-            setIsCorrect(true)
+            playCorrectAswer()
         } else {
-            setIsCorrect(false)
+            playInCorrectAswer()
         }
         console.log(gameScore);
         setcurrQuestion(currQuestion + 1)
@@ -45,6 +48,10 @@ function Quizz() {
 
     return (
         <div className="quizContainer t-White">
+            <div className="infoBar">
+                <p className="positionQuestion centerScreen">{currQuestion} / {Questions.length}</p>
+                <p>Score: {gameScore * 100}</p>
+            </div>
             <div className="optionContainer">
                 <h1 className="questionPrompt">{Questions[currQuestion].prompt}</h1>
                 <button
