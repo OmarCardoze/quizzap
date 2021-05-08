@@ -19,7 +19,6 @@
 .menuContainer {
   width: 100vw;
   height: 100vh;
-  background-color: rgb(23, 10, 85);
   display: grid;
   grid-template-columns: 1fr auto;
 }
@@ -36,10 +35,43 @@
   width: 60vw;
   height: 100vh;
   text-align: center;
+  background-color: rgb(1, 1, 75);
+}
+
+.text-info {
+  width: 60%;
+}
+
+.text-info h1 {
+  margin-bottom: 20px;
+}
+
+.menu-button {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgb(17, 170, 17);
+  color:white;
+  font-size: 1.5em;
+  appearance: none;
+  cursor: pointer;
+  border-width: 0;
+  border-style: hidden;
+  border-image: none;
 }
 
  @media (max-width: 768px) { 
   .titleContainer {
     display: none;
   }
+
+  .startContainer {
+    background-color: rgb(10, 28, 110);
+    color: rgb(255, 255, 255);
+    width: 100%;
+  }
+
+  .startContainer p {
+    font-size: clamp(1rem, 2.5vw, 2rem); 
+  }
+
 }
