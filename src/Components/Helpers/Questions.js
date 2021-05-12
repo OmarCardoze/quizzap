@@ -23,4 +23,12 @@ export const Questions = [
         optionD: "10",
         asnwer: "optionD",
       },
+      {
+        prompt: "Cuántas comarca tiene Panamá?",
+        optionA: "2",
+        optionB: "3",
+        optionC: "4",
+        optionD: "5",
+        asnwer: "optionD",
+      },
 ]

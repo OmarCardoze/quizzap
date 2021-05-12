@@ -10,7 +10,7 @@ function EndScreen() {
             <h1>
                 Gracias por jugar quizzap y poner tus conocimientos sobre Panamá a prueba!
             </h1>
-            <h2>Genial tu puntuacion es de {gameScore}</h2>
+            <h2>Genial tu puntuacion es de {gameScore * 100}</h2>
         </div>
     )
 }

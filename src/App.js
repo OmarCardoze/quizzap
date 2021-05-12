@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import './App.css';
 import EndScreen from './Components/EndScreen';
 import MainMenu from './Components/MainMenu';
 import Quizz from './Components/Quizz';

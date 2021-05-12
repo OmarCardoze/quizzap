@@ -4,9 +4,56 @@ import { QuizContext } from './Helpers/Context'
 import useSound from 'use-sound';
 import answerSoundCorrect from '../sounds/correctAnswer.mp3'
 import answerSoundIncorrect from '../sounds/incorrectAnswer.mp3'
+import styled from 'styled-components'
 
-import '../App.css'
+const QuizContainer = styled.div`
+    background-color: #000;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+`
+const InfoBar = styled.div`
+    background-color: rgb(185, 23, 226);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;   
+    align-items: center;
+    
+    p {
+        background-color: #fff;
+        color: #000;
+        border-radius: 50px;
+        padding: 10px;
+    }
+`
+const QuestionPrompt = styled.div`
+    color: aqua;
+    font-size: clamp(2.5rem, 6vw, 4rem); 
+`
+const Button = styled.button`
+    width: 80vw;
+    height: 10vh;
+    border-color: aliceblue;
+    background: ${props => props.backgroundColor || "blue"};
+    color: #fff;
+    border-width: 0;
+    margin-bottom: 4px;
+    cursor: pointer;
 
+    &:hover {
+        transform: scale(1.01);
+        background-color: rgba(0.0.0.0.7)   
+    }
+`
+
+const Progress = styled.progress`
+    height: 30px;
+    color: #000;
+`
+//``
 function Quizz() {
 
     const { gameScore, setGameScore, setGameState } = useContext(QuizContext)
@@ -18,16 +65,6 @@ function Quizz() {
     const [playCorrectAswer] = useSound(answerSoundCorrect);
     const [playInCorrectAswer] = useSound(answerSoundIncorrect);
 
-
-    function getRandomInt() {
-
-        const buttonColor = ["greenSoft", "lemonGrenn", "salmon", "rosa"]
-
-        const randomNumber = Math.floor(Math.random() * buttonColor.length);
-        const colorButton = buttonColor[randomNumber]
-        return colorButton
-    }
-
     const nextQuestion = () => {
         if (Questions[currQuestion].asnwer === optionChosen) {
             setGameScore(gameScore + 1)
@@ -35,54 +72,58 @@ function Quizz() {
         } else {
             playInCorrectAswer()
         }
-        console.log(gameScore);
-        setcurrQuestion(currQuestion + 1)
+        setcurrQuestion(currQuestion => currQuestion + 1)
     }
 
     const finishQuiz = () => {
         if (Questions[currQuestion].asnwer === optionChosen) {
             setGameScore(gameScore + 1)
+            playCorrectAswer()
+        } else {
+            playInCorrectAswer()
         }
         setGameState("endScreen")
     }
 
+    //const answerColor = Questions[currQuestion].asnwer === optionChosen ? 'red' : 'green'
+    //console.log(answerColor);
     return (
-        <div className="quizContainer t-White">
-            <div className="infoBar">
-                <p className="positionQuestion centerScreen">{currQuestion} / {Questions.length}</p>
+        <QuizContainer>
+            <InfoBar>
+                <Progress value={currQuestion} max={Questions.length}>33%</Progress>
                 <p>Score: {gameScore * 100}</p>
-            </div>
+            </InfoBar>
             <div className="optionContainer">
-                <h1 className="questionPrompt">{Questions[currQuestion].prompt}</h1>
-                <button
-                    className={`buttonOption ${getRandomInt()}`}
+                <QuestionPrompt>{Questions[currQuestion].prompt}</QuestionPrompt>
+                <Button
+                    backgroundColor={"#542e71"}
                     onClick={() => setOptionChosen("optionA")}>{Questions[currQuestion].optionA}
-                </button>
-                <button
-                    className={`buttonOption ${getRandomInt()}`}
+                </Button>
+                <Button
+                    backgroundColor={"#fb3640"}
                     onClick={() => setOptionChosen("optionB")}>{Questions[currQuestion].optionB}
-                </button>
-                <button
-                    className={`buttonOption ${getRandomInt()}`}
+                </Button>
+                <Button
+                    backgroundColor={"#51c4d3"}
                     onClick={() => setOptionChosen("optionC")}>{Questions[currQuestion].optionC}
-                </button>
-                <button
-                    className={`buttonOption ${getRandomInt()}`}
+                </Button>
+                <Button
+                    backgroundColor={"#126e82"}
                     onClick={() => setOptionChosen("optionD")}>{Questions[currQuestion].optionD}
-                </button>
+                </Button>
                 <div>
                     {currQuestion === Questions.length - 1 ? (
-                        <button onClick={finishQuiz}>
+                        <Button backgroundColor={"red"} onClick={finishQuiz}>
                             Finish Quiz
-                        </button>
+                        </Button>
                     ) : (
-                        <button onClick={nextQuestion}>
+                        <Button backgroundColor={"green"} onClick={nextQuestion}>
                             Next Question
-                        </button>
+                        </Button>
                     )}
                 </div>
             </div>
-        </div>
+        </QuizContainer>
     )
 }
 
