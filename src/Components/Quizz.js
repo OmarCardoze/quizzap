@@ -61,6 +61,7 @@ function Quizz() {
     const [Questions, setQuestions] = useState([])
     const [currQuestion, setcurrQuestion] = useState(0);
     const [optionChosen, setOptionChosen] = useState("");
+    const [disableResp, setdisableResp] = useState(false)
     const [loading, setLoading] = useState(false)
 
     //sound hooks
@@ -84,7 +85,14 @@ function Quizz() {
 
     loading && console.log('cargado el componente quiz')
 
+    const verifyAnswer = (option) => {
+        alert(option)
+        setOptionChosen(option)
+        setdisableResp(true)
+    }
+
     const nextQuestion = () => {
+        setdisableResp(false)
         if (Questions[currQuestion].asnwer === optionChosen) {
             setGameScore(gameScore + 1)
             playCorrectAswer()
@@ -118,19 +126,23 @@ function Quizz() {
                         <QuestionPrompt>{Questions[currQuestion].prompt}</QuestionPrompt>
                         <Button
                             backgroundColor={"#542e71"}
-                            onClick={() => setOptionChosen("optionA")}>{Questions[currQuestion].optionA}
+                            disabled={disableResp}
+                            onClick={() => verifyAnswer("optionA")}>{Questions[currQuestion].optionA}
                         </Button>
                         <Button
                             backgroundColor={"#fb3640"}
-                            onClick={() => setOptionChosen("optionB")}>{Questions[currQuestion].optionB}
+                            disabled={disableResp}
+                            onClick={() => verifyAnswer("optionB")}>{Questions[currQuestion].optionB}
                         </Button>
                         <Button
                             backgroundColor={"#51c4d3"}
-                            onClick={() => setOptionChosen("optionC")}>{Questions[currQuestion].optionC}
+                            disabled={disableResp}
+                            onClick={() => verifyAnswer("optionC")}>{Questions[currQuestion].optionC}
                         </Button>
                         <Button
                             backgroundColor={"#126e82"}
-                            onClick={() => setOptionChosen("optionD")}>{Questions[currQuestion].optionD}
+                            disabled={disableResp}
+                            onClick={() => verifyAnswer("optionD")}>{Questions[currQuestion].optionD}
                         </Button>
                         <div>
                             {currQuestion === Questions.length - 1 ? (
